@@ -22,12 +22,12 @@ Dir.mkdir(IMAGE_DIR) if not Dir.exist?(IMAGE_DIR)
 all_members.each do |member|
     next if member.is_bot
     next if member.deleted
-    if member.profile.image_1024.nil?
+    if member.profile.image_1024.nil? && member.profile.image_original.nil?
         puts "#{member.name} さんのアイコンが見つかりませんでした。"
         next
     end
 
-    icon_path = member.profile.image_1024
+    icon_path = member.profile.image_1024 || member.profile.image_original
     ext = File.extname(icon_path)
     path = "./#{IMAGE_DIR}/#{member.name}#{ext}"
 
